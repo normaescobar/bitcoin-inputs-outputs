@@ -1,0 +1,28 @@
+query ($network: BitcoinNetwork!, $address: String!, $from: ISO8601DateTime, $till: ISO8601DateTime) {
+  bitcoin(network: $network) {
+    inputs(date: {since: $from, till: $till}, inputAddress: {is: $address}) {
+      count
+      value
+      min_date: minimum(of: date)
+      max_date: maximum(of: date)
+    }
+    outputs(date: {since: $from, till: $till}, outputAddress: {is: $address}) {
+      count
+      value
+      min_date: minimum(of: date)
+      max_date: maximum(of: date)
+    }
+  }
+}
+
+//Insert data values here
+
+{
+  "limit": 10,
+  "offset": 0,
+  "network": "bitcoin",
+  "address": "bc1qgdjqv0av3q56jvd82tkdjpy7gdp9ut8tlqmgrpmv24sq90ecnvqqjwvw97",
+  "from": "2020-01-01",
+  "till": "2022-01-01T23:59:59",
+  "dateFormat": "%Y-%m-%d"
+}
